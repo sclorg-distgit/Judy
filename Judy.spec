@@ -3,7 +3,7 @@
 
 Name:		%{?scl_prefix}Judy
 Version:	1.0.5
-Release:	12%{?dist}
+Release:	13.bs1%{?dist}
 Summary:	General purpose dynamic array
 Group:		System Environment/Libraries
 License:	LGPLv2+
@@ -17,6 +17,7 @@ Patch0:		Judy-1.0.4-test-shared.patch
 Patch1:		Judy-1.0.4-fix-Judy1-mans.patch
 # Fix some code with undefined behavior, commented on and removed by gcc
 Patch2:		Judy-1.0.5-undefined-behavior.patch
+%{?scl:Requires:%scl_runtime}
 
 %description
 Judy is a C library that provides a state-of-the-art core technology
@@ -34,6 +35,7 @@ population.
 Summary:	Development libraries and headers for Judy
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+%{?scl:Requires:%scl_runtime}
 
 %description devel
 This package contains the development libraries and header files
@@ -88,6 +90,10 @@ cd -
 %postun -p /sbin/ldconfig
 
 %changelog
+* Thu Sep 21 2017 Honza Horak <hhorak@redhat.com> - 1.0.5-13
+- Fix uninstalled directories
+  Resolves: #1487292
+
 * Tue Jan 27 2015 Honza Horak <hhorak@redhat.com> - 1.0.5-12
 - Rename README.Fedora to README.distro
 
